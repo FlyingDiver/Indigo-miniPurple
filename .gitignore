@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/Dual Sensor.json
+/Indoor Sensor.json
+/Sensor Data.txt

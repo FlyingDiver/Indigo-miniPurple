@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<Devices>
+	<Device type="sensor" id="purpleSensor">
+		<Name>PurpleAir Sensor</Name>
+		<ConfigUI>
+			<Field id="SupportsOnState" type="checkbox" defaultValue="false" hidden="true" />
+			<Field id="SupportsSensorValue" type="checkbox" defaultValue="true" hidden="true" />
+
+			<Field id="address" type="textfield" >
+				<Label>Sensor ID:</Label>
+			</Field>
+		</ConfigUI>
+		<States>
+			<State id="Label">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Device Name</TriggerLabel>
+				<ControlPageLabel>name</ControlPageLabel>
+			</State>
+			<State id="Temperature">
+				<ValueType>Number</ValueType>
+				<TriggerLabel>Temperature</TriggerLabel>
+				<ControlPageLabel>Temperature</ControlPageLabel>
+			</State>
+			<State id="Humidity">
+				<ValueType>Number</ValueType>
+				<TriggerLabel>Humidity</TriggerLabel>
+				<ControlPageLabel>Humidity</ControlPageLabel>
+			</State>
+			<State id="Pressure">
+				<ValueType>Number</ValueType>
+				<TriggerLabel>Pressure</TriggerLabel>
+				<ControlPageLabel>Pressure</ControlPageLabel>
+			</State>
+			<State id="Uptime">
+				<ValueType>Number</ValueType>
+				<TriggerLabel>Uptime</TriggerLabel>
+				<ControlPageLabel>Uptime</ControlPageLabel>
+			</State>
+			<State id="Version">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Version</TriggerLabel>
+				<ControlPageLabel>Version</ControlPageLabel>
+			</State>
+			<State id="Hardware">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Hardware</TriggerLabel>
+				<ControlPageLabel>Hardware</ControlPageLabel>
+			</State>
+			<State id="Latitude">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Latitude</TriggerLabel>
+				<ControlPageLabel>Latitude</ControlPageLabel>
+			</State>
+			<State id="Longitude">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Longitude</TriggerLabel>
+				<ControlPageLabel>Longitude</ControlPageLabel>
+			</State>
+			<State id="RSSI">
+				<ValueType>String</ValueType>
+				<TriggerLabel>RSSI</TriggerLabel>
+				<ControlPageLabel>RSSI</ControlPageLabel>
+			</State>
+			<State id="p_0_3_um">
+				<ValueType>String</ValueType>
+				<TriggerLabel>p_0_3_um</TriggerLabel>
+				<ControlPageLabel>p_0_3_um</ControlPageLabel>
+			</State>
+			<State id="p_0_5_um">
+				<ValueType>String</ValueType>
+				<TriggerLabel>p_0_5_um</TriggerLabel>
+				<ControlPageLabel>p_0_5_um</ControlPageLabel>
+			</State>
+			<State id="p_10_0_um">
+				<ValueType>String</ValueType>
+				<TriggerLabel>p_10_0_um</TriggerLabel>
+				<ControlPageLabel>p_10_0_um</ControlPageLabel>
+			</State>
+			<State id="p_1_0_um">
+				<ValueType>String</ValueType>
+				<TriggerLabel>p_1_0_um</TriggerLabel>
+				<ControlPageLabel>p_1_0_um</ControlPageLabel>
+			</State>
+			<State id="p_2_5_um">
+				<ValueType>String</ValueType>
+				<TriggerLabel>p_2_5_um</TriggerLabel>
+				<ControlPageLabel>p_2_5_um</ControlPageLabel>
+			</State>
+			<State id="p_5_0_um">
+				<ValueType>String</ValueType>
+				<TriggerLabel>p_5_0_um</TriggerLabel>
+				<ControlPageLabel>p_5_0_um</ControlPageLabel>
+			</State>
+			<State id="pm10_0_atm">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm10_0_atm</TriggerLabel>
+				<ControlPageLabel>pm10_0_atm</ControlPageLabel>
+			</State>
+			<State id="pm10_0_cf_1">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm10_0_cf_1</TriggerLabel>
+				<ControlPageLabel>pm10_0_cf_1</ControlPageLabel>
+			</State>
+			<State id="pm1_0_atm">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm1_0_atm</TriggerLabel>
+				<ControlPageLabel>pm1_0_atm</ControlPageLabel>
+			</State>
+			<State id="pm1_0_cf_1">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm1_0_cf_1</TriggerLabel>
+				<ControlPageLabel>pm1_0_cf_1</ControlPageLabel>
+			</State>
+			<State id="pm2_5_atm">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_atm</TriggerLabel>
+				<ControlPageLabel>pm2_5_atm</ControlPageLabel>
+			</State>
+			<State id="pm2_5_cf_1">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_cf_1</TriggerLabel>
+				<ControlPageLabel>pm2_5_cf_1</ControlPageLabel>
+			</State>
+		</States>
+	</Device>
+</Devices>
