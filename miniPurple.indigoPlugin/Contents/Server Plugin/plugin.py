@@ -6,6 +6,7 @@ import time
 import requests
 import logging
 import json
+import aqi
 
 ################################################################################
 class Plugin(indigo.PluginBase):
@@ -84,36 +85,36 @@ class Plugin(indigo.PluginBase):
             except requests.exceptions.RequestException as err:
                 self.logger.error(u"{}: getData RequestException: {}".format(device.name, err))
             else:
-                self.logger.debug(u"{}: getData for sensor {}:\n{}".format(device.name, sensorID, response.text))
+                self.logger.threaddebug(u"{}: getData for sensor {}:\n{}".format(device.name, sensorID, response.text))
                 sensorData = response.json()['results'][0]
                 
-                device.updateStateOnServer(key='sensorValue', value=float(sensorData['PM2_5Value']), uiValue=sensorData['PM2_5Value'])
-
-                device.updateStateOnServer(key='Label', value=sensorData['Label'])
-                device.updateStateOnServer(key='Temperature', value=float(sensorData['temp_f']), decimalPlaces=0)
-                device.updateStateOnServer(key='Humidity', value=float(sensorData['humidity']), decimalPlaces=0)
-                device.updateStateOnServer(key='Pressure', value=float(sensorData['pressure']), decimalPlaces=2)
-
-                device.updateStateOnServer(key='Latitude', value=sensorData['Lat'])
-                device.updateStateOnServer(key='Longitude', value=sensorData['Lon'])
-                
-                device.updateStateOnServer(key='RSSI', value=sensorData['RSSI'])
-                device.updateStateOnServer(key='Uptime', value=sensorData['Uptime'])
-                device.updateStateOnServer(key='Version', value=sensorData['Version'])
-                device.updateStateOnServer(key='Hardware', value=sensorData['DEVICE_HARDWAREDISCOVERED'])
-
-                device.updateStateOnServer(key='p_0_3_um', value=sensorData['p_0_3_um'])
-                device.updateStateOnServer(key='p_0_5_um', value=sensorData['p_0_5_um'])
-                device.updateStateOnServer(key='p_10_0_um', value=sensorData['p_10_0_um'])
-                device.updateStateOnServer(key='p_1_0_um', value=sensorData['p_1_0_um'])
-                device.updateStateOnServer(key='p_2_5_um', value=sensorData['p_2_5_um'])
-                device.updateStateOnServer(key='p_5_0_um', value=sensorData['p_5_0_um'])
-                device.updateStateOnServer(key='pm10_0_atm', value=sensorData['pm10_0_atm'])
-                device.updateStateOnServer(key='pm10_0_cf_1', value=sensorData['pm10_0_cf_1'])
-                device.updateStateOnServer(key='pm1_0_atm', value=sensorData['pm1_0_atm'])
-                device.updateStateOnServer(key='pm1_0_cf_1', value=sensorData['pm1_0_cf_1'])
-                device.updateStateOnServer(key='pm2_5_atm', value=sensorData['pm2_5_atm'])
-                device.updateStateOnServer(key='pm2_5_cf_1', value=sensorData['pm2_5_cf_1'])
+                sensor_aqi = int(aqi.to_iaqi(aqi.POLLUTANT_PM25, sensorData['PM2_5Value'], algo=aqi.ALGO_EPA))
+                state_list = [
+                    {'key': 'sensorValue',  'value': sensor_aqi,               'uiValue': "{}".format(sensor_aqi)},
+                    {'key': 'Temperature',  'value': sensorData['temp_f'],     'decimalPlaces': 0},
+                    {'key': 'Humidity',     'value': sensorData['humidity'],   'decimalPlaces': 0},
+                    {'key': 'Pressure',     'value': sensorData['pressure'],   'decimalPlaces': 2},
+                    {'key': 'Label',        'value': sensorData['Label']},
+                    {'key': 'Latitude',     'value': sensorData['Lat']},
+                    {'key': 'Longitude',    'value': sensorData['Lon']},
+                    {'key': 'RSSI',         'value': sensorData['RSSI']},
+                    {'key': 'Uptime',       'value': sensorData['Uptime']},
+                    {'key': 'Version',      'value': sensorData['Version']},
+                    {'key': 'Hardware',     'value': sensorData['DEVICE_HARDWAREDISCOVERED']},
+                    {'key': 'p_0_3_um',     'value': sensorData['p_0_3_um']},
+                    {'key': 'p_0_5_um',     'value': sensorData['p_0_5_um']},
+                    {'key': 'p_10_0_um',    'value': sensorData['p_10_0_um']},
+                    {'key': 'p_1_0_um',     'value': sensorData['p_1_0_um']},
+                    {'key': 'p_2_5_um',     'value': sensorData['p_2_5_um']},
+                    {'key': 'p_5_0_um',     'value': sensorData['p_5_0_um']},
+                    {'key': 'pm10_0_atm',   'value': sensorData['pm10_0_atm']},
+                    {'key': 'pm10_0_cf_1',  'value': sensorData['pm10_0_cf_1']},
+                    {'key': 'pm1_0_atm',    'value': sensorData['pm1_0_atm']},
+                    {'key': 'pm1_0_cf_1',   'value': sensorData['pm1_0_cf_1']},
+                    {'key': 'pm2_5_atm',    'value': sensorData['pm2_5_atm']},
+                    {'key': 'pm2_5_cf_1',   'value': sensorData['pm2_5_cf_1']}
+                ]
+                device.updateStatesOnServer(state_list)
 
 
     ########################################
