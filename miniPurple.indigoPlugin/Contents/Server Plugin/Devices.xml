@@ -121,6 +121,41 @@
 				<TriggerLabel>pm2_5_cf_1</TriggerLabel>
 				<ControlPageLabel>pm2_5_cf_1</ControlPageLabel>
 			</State>
+			<State id="pm2_5_current">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_current</TriggerLabel>
+				<ControlPageLabel>pm2_5_current</ControlPageLabel>
+			</State>
+			<State id="pm2_5_10m">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_10m</TriggerLabel>
+				<ControlPageLabel>pm2_5_10m</ControlPageLabel>
+			</State>
+			<State id="pm2_5_30m">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_30m</TriggerLabel>
+				<ControlPageLabel>pm2_5_30m</ControlPageLabel>
+			</State>
+			<State id="pm2_5_1h">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_1h</TriggerLabel>
+				<ControlPageLabel>pm2_5_1h</ControlPageLabel>
+			</State>
+			<State id="pm2_5_6h">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_6h</TriggerLabel>
+				<ControlPageLabel>pm2_5_6h</ControlPageLabel>
+			</State>
+			<State id="pm2_5_24h">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_24h</TriggerLabel>
+				<ControlPageLabel>pm2_5_24h</ControlPageLabel>
+			</State>
+			<State id="pm2_5_1w">
+				<ValueType>String</ValueType>
+				<TriggerLabel>pm2_5_1w</TriggerLabel>
+				<ControlPageLabel>pm2_5_1w</ControlPageLabel>
+			</State>
 		</States>
 	</Device>
 </Devices>
