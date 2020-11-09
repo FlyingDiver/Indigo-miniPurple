@@ -86,8 +86,18 @@ class Plugin(indigo.PluginBase):
                 self.logger.error(u"{}: getData RequestException: {}".format(device.name, err))
             else:
                 self.logger.threaddebug(u"{}: getData for sensor {}:\n{}".format(device.name, sensorID, response.text))
-                sensorData = response.json()['results'][0]
-                
+                try:
+                    sensorData = response.json()['results'][0]
+                except:
+                    self.logger.error(u"{}: getData 'results' key missing: {}".format(device.name, response.text))
+                    return
+
+                try:
+                    sensorStats = json.loads(sensorData['Stats'])
+                except:
+                    self.logger.error(u"{}: getData 'Stats' key missing: {}".format(device.name, response.text))
+                    return
+
                 sensor_aqi = int(aqi.to_iaqi(aqi.POLLUTANT_PM25, sensorData['PM2_5Value'], algo=aqi.ALGO_EPA))
                 state_list = [
                     {'key': 'sensorValue',  'value': sensor_aqi,               'uiValue': "{}".format(sensor_aqi)},
@@ -112,7 +122,16 @@ class Plugin(indigo.PluginBase):
                     {'key': 'pm1_0_atm',    'value': sensorData['pm1_0_atm']},
                     {'key': 'pm1_0_cf_1',   'value': sensorData['pm1_0_cf_1']},
                     {'key': 'pm2_5_atm',    'value': sensorData['pm2_5_atm']},
-                    {'key': 'pm2_5_cf_1',   'value': sensorData['pm2_5_cf_1']}
+                    {'key': 'pm2_5_cf_1',   'value': sensorData['pm2_5_cf_1']},
+
+                    {'key': 'pm2_5_current','value': sensorStats['v']},
+                    {'key': 'pm2_5_10m',    'value': sensorStats['v1']},
+                    {'key': 'pm2_5_30m',    'value': sensorStats['v2']},
+                    {'key': 'pm2_5_1h',     'value': sensorStats['v3']},
+                    {'key': 'pm2_5_6h',     'value': sensorStats['v4']},
+                    {'key': 'pm2_5_24h',    'value': sensorStats['v5']},
+                    {'key': 'pm2_5_1w',     'value': sensorStats['v6']},
+                    
                 ]
                 device.updateStatesOnServer(state_list)
 
