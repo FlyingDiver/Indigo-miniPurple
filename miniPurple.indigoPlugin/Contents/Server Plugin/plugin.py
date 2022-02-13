@@ -19,59 +19,45 @@ class Plugin(indigo.PluginBase):
 
         pfmt = logging.Formatter('%(asctime)s.%(msecs)03d\t[%(levelname)8s] %(name)20s.%(funcName)-25s%(msg)s', datefmt='%Y-%m-%d %H:%M:%S')
         self.plugin_file_handler.setFormatter(pfmt)
-
-        try:
-            self.logLevel = int(self.pluginPrefs[u"logLevel"])
-        except:
-            self.logLevel = logging.INFO
+        self.logLevel = int(self.pluginPrefs,get("logLevel", logging.INFO))
         self.indigo_log_handler.setLevel(self.logLevel)
-    
 
-    def startup(self):
-        indigo.server.log(u"Starting miniPurple")
+        self.sensorDevices = {}  # Indigo device IDs, keyed by address (sensor ID)
 
-        self.sensorDevices = {}     # Indigo device IDs, keyed by address (sensor ID)
-        
         self.updateFrequency = float(self.pluginPrefs.get('updateFrequency', "1")) * 60.0
-        self.logger.debug(u"updateFrequency = {}".format(self.updateFrequency))
+        self.logger.debug(f"updateFrequency = {self.updateFrequency}")
         self.next_update = time.time()
 
+    def startup(self):
+        self.logger.info("Starting miniPurple")
 
     def shutdown(self):
-        indigo.server.log(u"Shutting down miniPurple")
-
+        self.logger.info("Stopping miniPurple")
 
     def runConcurrentThread(self):
-        self.logger.debug(u"Starting runConcurrentThread")
-
         try:
             while True:
-
                 if time.time() > self.next_update:
                     self.getData()
                     self.next_update = time.time() + self.updateFrequency
-
                 self.sleep(1.0)
-
         except self.StopThread:
             pass
 
     def deviceStartComm(self, device):
             
         if device.deviceTypeId == 'purpleSensor':
-            self.logger.debug(u"{}: deviceStartComm: Adding device ({}) to sensor list".format(device.name, device.id))
+            self.logger.debug(f"{device.name}: deviceStartComm: Adding device ({device.id}) to sensor list")
             assert device.address not in self.sensorDevices
             self.sensorDevices[device.address] = device.id
-            self.logger.threaddebug(u"devices = {}".format(self.sensorDevices))
-            
+            self.logger.threaddebug(f"devices = {self.sensorDevices}")
         
     def deviceStopComm(self, device):
 
         if device.deviceTypeId == 'purpleSensor':
-            self.logger.debug(u"{}: deviceStopComm: Removing device ({}) from device list".format(device.name, device.id))
+            self.logger.debug(f"{device.name}: deviceStopComm: Removing device ({device.id}) from device list")
             assert device.address in self.sensorDevices
             del self.sensorDevices[device.address]
-
 
     def getData(self):
 
@@ -79,28 +65,28 @@ class Plugin(indigo.PluginBase):
 
             device = indigo.devices[devID]
 
-            url = "https://www.purpleair.com/json?show={}".format(sensorID)
+            url = f"https://www.purpleair.com/json?show={sensorID}"
             try:
                 response = requests.get(url)
             except requests.exceptions.RequestException as err:
-                self.logger.error(u"{}: getData RequestException: {}".format(device.name, err))
+                self.logger.error(f"{device.name}: getData RequestException: {err}")
             else:
-                self.logger.threaddebug(u"{}: getData for sensor {}:\n{}".format(device.name, sensorID, response.text))
+                self.logger.threaddebug(f"{device.name}: getData for sensor {sensorID}:\n{response.text}")
                 try:
                     sensorData = response.json()['results'][0]
-                except:
-                    self.logger.error(u"{}: getData 'results' key missing: {}".format(device.name, response.text))
+                except (Exception,):
+                    self.logger.error(f"{device.name}: getData 'results' key missing: {response.text}")
                     return
 
                 try:
                     sensorStats = json.loads(sensorData['Stats'])
-                except:
-                    self.logger.error(u"{}: getData 'Stats' key missing: {}".format(device.name, response.text))
+                except (Exception,):
+                    self.logger.error(f"{device.name}: getData 'Stats' key missing: {response.text}")
                     return
 
                 sensor_aqi = int(aqi.to_iaqi(aqi.POLLUTANT_PM25, sensorData['PM2_5Value'], algo=aqi.ALGO_EPA))
                 state_list = [
-                    {'key': 'sensorValue',  'value': sensor_aqi,               'uiValue': "{}".format(sensor_aqi)},
+                    {'key': 'sensorValue',  'value': sensor_aqi,               'uiValue': f"{sensor_aqi}"},
                     {'key': 'Temperature',  'value': sensorData['temp_f'],     'decimalPlaces': 0},
                     {'key': 'Humidity',     'value': sensorData['humidity'],   'decimalPlaces': 0},
                     {'key': 'Pressure',     'value': sensorData['pressure'],   'decimalPlaces': 2},
@@ -135,22 +121,12 @@ class Plugin(indigo.PluginBase):
                 ]
                 device.updateStatesOnServer(state_list)
 
-
     ########################################
     # PluginConfig methods
     ########################################
 
     def closedPrefsConfigUi(self, valuesDict, userCancelled):
         if not userCancelled:
-            try:
-                self.logLevel = int(valuesDict[u"logLevel"])
-            except:
-                self.logLevel = logging.INFO
+            self.logLevel = int(valuesDict,get("logLevel", logging.INFO))
             self.indigo_log_handler.setLevel(self.logLevel)
-
-            try:
-                self.updateFrequency = float(valuesDict[u"updateFrequency"]) * 60.0
-            except:
-                self.updateFrequency = 60.0
-
-
+            self.updateFrequency = float(valuesDict.get('updateFrequency', "1")) * 60.0

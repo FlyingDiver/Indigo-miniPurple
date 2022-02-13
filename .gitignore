@@ -132,3 +132,5 @@ dmypy.json
 /Sensor Data.txt
 
 .DS_Store
+
+miniPurple.indigoPlugin/.idea/
