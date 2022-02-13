@@ -130,3 +130,5 @@ dmypy.json
 /Dual Sensor.json
 /Indoor Sensor.json
 /Sensor Data.txt
+
+.DS_Store
