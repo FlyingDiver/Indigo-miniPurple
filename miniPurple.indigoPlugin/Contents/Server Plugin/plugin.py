@@ -19,12 +19,13 @@ class Plugin(indigo.PluginBase):
 
         pfmt = logging.Formatter('%(asctime)s.%(msecs)03d\t[%(levelname)8s] %(name)20s.%(funcName)-25s%(msg)s', datefmt='%Y-%m-%d %H:%M:%S')
         self.plugin_file_handler.setFormatter(pfmt)
-        self.logLevel = int(self.pluginPrefs,get("logLevel", logging.INFO))
+        self.logLevel = int(pluginPrefs.get("logLevel", logging.INFO))
         self.indigo_log_handler.setLevel(self.logLevel)
+        self.logger.debug(f"logLevel = {self.logLevel}")
 
         self.sensorDevices = {}  # Indigo device IDs, keyed by address (sensor ID)
 
-        self.updateFrequency = float(self.pluginPrefs.get('updateFrequency', "1")) * 60.0
+        self.updateFrequency = float(pluginPrefs.get('updateFrequency', "1")) * 60.0
         self.logger.debug(f"updateFrequency = {self.updateFrequency}")
         self.next_update = time.time()
 
@@ -61,7 +62,7 @@ class Plugin(indigo.PluginBase):
 
     def getData(self):
 
-        for sensorID, devID in self.sensorDevices.iteritems():
+        for sensorID, devID in self.sensorDevices.items():
 
             device = indigo.devices[devID]
 
@@ -127,6 +128,7 @@ class Plugin(indigo.PluginBase):
 
     def closedPrefsConfigUi(self, valuesDict, userCancelled):
         if not userCancelled:
-            self.logLevel = int(valuesDict,get("logLevel", logging.INFO))
+            self.logLevel = int(valuesDict.get("logLevel", logging.INFO))
             self.indigo_log_handler.setLevel(self.logLevel)
+            self.logger.debug(f"logLevel = {self.logLevel}")
             self.updateFrequency = float(valuesDict.get('updateFrequency', "1")) * 60.0
