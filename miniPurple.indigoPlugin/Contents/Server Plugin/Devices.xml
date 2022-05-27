@@ -12,10 +12,10 @@
 			</Field>
 		</ConfigUI>
 		<States>
-			<State id="Label">
+			<State id="Name">
 				<ValueType>String</ValueType>
 				<TriggerLabel>Device Name</TriggerLabel>
-				<ControlPageLabel>name</ControlPageLabel>
+				<ControlPageLabel>Device Name</ControlPageLabel>
 			</State>
 			<State id="Temperature">
 				<ValueType>Number</ValueType>
@@ -57,105 +57,30 @@
 				<TriggerLabel>Longitude</TriggerLabel>
 				<ControlPageLabel>Longitude</ControlPageLabel>
 			</State>
+			<State id="Altitude">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Altitude</TriggerLabel>
+				<ControlPageLabel>Altitude</ControlPageLabel>
+			</State>
 			<State id="RSSI">
 				<ValueType>String</ValueType>
 				<TriggerLabel>RSSI</TriggerLabel>
 				<ControlPageLabel>RSSI</ControlPageLabel>
 			</State>
-			<State id="p_0_3_um">
+			<State id="pm1_0">
 				<ValueType>String</ValueType>
-				<TriggerLabel>p_0_3_um</TriggerLabel>
-				<ControlPageLabel>p_0_3_um</ControlPageLabel>
+				<TriggerLabel>pm1.0 Value</TriggerLabel>
+				<ControlPageLabel>pm2.5 Value</ControlPageLabel>
 			</State>
-			<State id="p_0_5_um">
+			<State id="pm2_5">
 				<ValueType>String</ValueType>
-				<TriggerLabel>p_0_5_um</TriggerLabel>
-				<ControlPageLabel>p_0_5_um</ControlPageLabel>
+				<TriggerLabel>pm2.5 Value</TriggerLabel>
+				<ControlPageLabel>pm2.5 Value</ControlPageLabel>
 			</State>
-			<State id="p_10_0_um">
+			<State id="pm10_0">
 				<ValueType>String</ValueType>
-				<TriggerLabel>p_10_0_um</TriggerLabel>
-				<ControlPageLabel>p_10_0_um</ControlPageLabel>
-			</State>
-			<State id="p_1_0_um">
-				<ValueType>String</ValueType>
-				<TriggerLabel>p_1_0_um</TriggerLabel>
-				<ControlPageLabel>p_1_0_um</ControlPageLabel>
-			</State>
-			<State id="p_2_5_um">
-				<ValueType>String</ValueType>
-				<TriggerLabel>p_2_5_um</TriggerLabel>
-				<ControlPageLabel>p_2_5_um</ControlPageLabel>
-			</State>
-			<State id="p_5_0_um">
-				<ValueType>String</ValueType>
-				<TriggerLabel>p_5_0_um</TriggerLabel>
-				<ControlPageLabel>p_5_0_um</ControlPageLabel>
-			</State>
-			<State id="pm10_0_atm">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm10_0_atm</TriggerLabel>
-				<ControlPageLabel>pm10_0_atm</ControlPageLabel>
-			</State>
-			<State id="pm10_0_cf_1">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm10_0_cf_1</TriggerLabel>
-				<ControlPageLabel>pm10_0_cf_1</ControlPageLabel>
-			</State>
-			<State id="pm1_0_atm">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm1_0_atm</TriggerLabel>
-				<ControlPageLabel>pm1_0_atm</ControlPageLabel>
-			</State>
-			<State id="pm1_0_cf_1">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm1_0_cf_1</TriggerLabel>
-				<ControlPageLabel>pm1_0_cf_1</ControlPageLabel>
-			</State>
-			<State id="pm2_5_atm">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_atm</TriggerLabel>
-				<ControlPageLabel>pm2_5_atm</ControlPageLabel>
-			</State>
-			<State id="pm2_5_cf_1">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_cf_1</TriggerLabel>
-				<ControlPageLabel>pm2_5_cf_1</ControlPageLabel>
-			</State>
-			<State id="pm2_5_current">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_current</TriggerLabel>
-				<ControlPageLabel>pm2_5_current</ControlPageLabel>
-			</State>
-			<State id="pm2_5_10m">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_10m</TriggerLabel>
-				<ControlPageLabel>pm2_5_10m</ControlPageLabel>
-			</State>
-			<State id="pm2_5_30m">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_30m</TriggerLabel>
-				<ControlPageLabel>pm2_5_30m</ControlPageLabel>
-			</State>
-			<State id="pm2_5_1h">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_1h</TriggerLabel>
-				<ControlPageLabel>pm2_5_1h</ControlPageLabel>
-			</State>
-			<State id="pm2_5_6h">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_6h</TriggerLabel>
-				<ControlPageLabel>pm2_5_6h</ControlPageLabel>
-			</State>
-			<State id="pm2_5_24h">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_24h</TriggerLabel>
-				<ControlPageLabel>pm2_5_24h</ControlPageLabel>
-			</State>
-			<State id="pm2_5_1w">
-				<ValueType>String</ValueType>
-				<TriggerLabel>pm2_5_1w</TriggerLabel>
-				<ControlPageLabel>pm2_5_1w</ControlPageLabel>
+				<TriggerLabel>pm10.0 Value</TriggerLabel>
+				<ControlPageLabel>pm10.0 Value</ControlPageLabel>
 			</State>
 		</States>
 	</Device>

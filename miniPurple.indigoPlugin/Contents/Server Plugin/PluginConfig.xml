@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
 <PluginConfig>
+    <Field id="apiReadKey" type="textfield" defaultValue="">
+        <Label>PurpleAir API Read Key (Required):</Label>
+    </Field>
+    <Field id="apiReadKeyNote" type="label" fontSize="small" fontColor="darkgray">
+        <Label>See plugin description in plugin store for instructions.</Label>
+    </Field>
+    <Field id="sep1" type="separator"/>
     <Field id="updateFrequency" type="textfield" defaultValue="10">
         <Label>Update device status frequency (minutes):</Label>
     </Field>
