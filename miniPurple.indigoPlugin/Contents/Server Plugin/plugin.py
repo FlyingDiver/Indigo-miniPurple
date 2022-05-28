@@ -22,22 +22,25 @@ class Plugin(indigo.PluginBase):
         self.logLevel = int(pluginPrefs.get("logLevel", logging.INFO))
         self.indigo_log_handler.setLevel(self.logLevel)
         self.logger.debug(f"logLevel = {self.logLevel}")
+        self.api_key_ok = False
 
         self.sensorDevices = {}  # Indigo device IDs, keyed by address (sensor ID)
 
         self.apiReadKey = pluginPrefs.get("apiReadKey", None)
         if not (self.apiReadKey and len(self.apiReadKey)):
             self.logger.error("API Read Key must be specified in Plugin Config")
-
-        url = f"https://api.purpleair.com/v1/keys"
-        my_headers = {'X-API-Key': self.apiReadKey}
-        try:
-            response = requests.get(url, headers=my_headers)
-        except requests.exceptions.RequestException as err:
-            self.logger.error(f"{device.name}: check key RequestException: {err}")
         else:
-            if response.json()['api_key_type'] != "READ":
-                self.logger.error("Invalid API Read Key specified in Plugin Config")
+            url = f"https://api.purpleair.com/v1/keys"
+            my_headers = {'X-API-Key': self.apiReadKey}
+            try:
+                response = requests.get(url, headers=my_headers)
+            except requests.exceptions.RequestException as err:
+                self.logger.error(f"{device.name}: check key RequestException: {err}")
+            else:
+                if response.json()['api_key_type'] != "READ":
+                    self.logger.error("Invalid API Read Key specified in Plugin Config")
+                else:
+                    self.api_key_ok = True
 
         self.updateFrequency = float(pluginPrefs.get('updateFrequency', "1")) * 60.0
         self.logger.debug(f"updateFrequency = {self.updateFrequency}")
@@ -53,7 +56,8 @@ class Plugin(indigo.PluginBase):
         try:
             while True:
                 if time.time() > self.next_update:
-                    self.getData()
+                    if self.api_key_ok:
+                        self.getData()
                     self.next_update = time.time() + self.updateFrequency
                 self.sleep(1.0)
         except self.StopThread:
