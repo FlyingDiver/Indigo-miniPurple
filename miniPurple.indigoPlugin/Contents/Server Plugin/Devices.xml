@@ -12,57 +12,62 @@
 			</Field>
 		</ConfigUI>
 		<States>
-			<State id="Name">
+			<State id="model">
 				<ValueType>String</ValueType>
-				<TriggerLabel>Device Name</TriggerLabel>
-				<ControlPageLabel>Device Name</ControlPageLabel>
+				<TriggerLabel>Device Model</TriggerLabel>
+				<ControlPageLabel>Device Model</ControlPageLabel>
 			</State>
-			<State id="Temperature">
+			<State id="temperature">
 				<ValueType>Number</ValueType>
 				<TriggerLabel>Temperature</TriggerLabel>
 				<ControlPageLabel>Temperature</ControlPageLabel>
 			</State>
-			<State id="Humidity">
+			<State id="humidity">
 				<ValueType>Number</ValueType>
 				<TriggerLabel>Humidity</TriggerLabel>
 				<ControlPageLabel>Humidity</ControlPageLabel>
 			</State>
-			<State id="Pressure">
+			<State id="pressure">
 				<ValueType>Number</ValueType>
 				<TriggerLabel>Pressure</TriggerLabel>
 				<ControlPageLabel>Pressure</ControlPageLabel>
 			</State>
-			<State id="Uptime">
+			<State id="uptime">
 				<ValueType>Number</ValueType>
 				<TriggerLabel>Uptime</TriggerLabel>
 				<ControlPageLabel>Uptime</ControlPageLabel>
 			</State>
-			<State id="Version">
+			<State id="version">
 				<ValueType>String</ValueType>
 				<TriggerLabel>Version</TriggerLabel>
 				<ControlPageLabel>Version</ControlPageLabel>
 			</State>
-			<State id="Hardware">
+			<State id="hardware">
 				<ValueType>String</ValueType>
 				<TriggerLabel>Hardware</TriggerLabel>
 				<ControlPageLabel>Hardware</ControlPageLabel>
 			</State>
-			<State id="Latitude">
+			<State id="latitude">
 				<ValueType>String</ValueType>
 				<TriggerLabel>Latitude</TriggerLabel>
 				<ControlPageLabel>Latitude</ControlPageLabel>
 			</State>
-			<State id="Longitude">
+			<State id="longitude">
 				<ValueType>String</ValueType>
 				<TriggerLabel>Longitude</TriggerLabel>
 				<ControlPageLabel>Longitude</ControlPageLabel>
 			</State>
-			<State id="Altitude">
+			<State id="altitude">
 				<ValueType>String</ValueType>
 				<TriggerLabel>Altitude</TriggerLabel>
 				<ControlPageLabel>Altitude</ControlPageLabel>
 			</State>
-			<State id="RSSI">
+			<State id="last_seen">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Last Seen</TriggerLabel>
+				<ControlPageLabel>Last Seen</ControlPageLabel>
+			</State>
+			<State id="rssi">
 				<ValueType>String</ValueType>
 				<TriggerLabel>RSSI</TriggerLabel>
 				<ControlPageLabel>RSSI</ControlPageLabel>
